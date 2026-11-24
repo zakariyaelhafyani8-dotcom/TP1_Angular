@@ -1,0 +1,8 @@
+<h2>Espace Professeur</h2>
+<ul>
+  @for (p of profs; track p.id) {
+    <li>{{ p.nom }} — {{ p.module }}</li>
+  } @empty {
+    <li>Aucun professeur</li>
+  }
+</ul>

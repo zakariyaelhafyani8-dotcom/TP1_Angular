@@ -1,0 +1,66 @@
+<h2>Contrôle de flux</h2>
+
+<section>
+  <h3>&#64;for</h3>
+  <ul>Liste des items
+    @for (item of items; track $index) {
+      <li>{{ item }}</li>
+    }
+  </ul>
+</section>
+
+<section>
+  <h3>&#64;for — track &amp; &#64;empty</h3>
+  <ul>List of Persons
+    @for (item of personne; track item.id) {
+      <li>
+        {{ $index }} : {{ item.name }} ({{ item.age }} ans)
+        <button (click)="supprimerPeronne(item.id)">supprimer</button>
+      </li>
+    } @empty {
+      <p>Aucun utilisateur trouvé</p>
+    }
+  </ul>
+  <button (click)="ajouterPersonne()">Actualiser</button>
+</section>
+
+<section>
+  <h3>&#64;if</h3>
+  <div class="controles">
+    <button (click)="toggleLogin()">{{ user.isLoggedIn ? 'Se déconnecter' : 'Se connecter' }}</button>
+    <button (click)="setRole('admin')">admin</button>
+    <button (click)="setRole('user')">user</button>
+    <button (click)="setRole('')">(vide)</button>
+  </div>
+
+  @if (user.isLoggedIn) {
+    <p>Bienvenu {{ user.name }}, vous êtes connecté en tant que <strong>{{ user.role }}</strong>.</p>
+  }
+  @if (user.role == 'admin') {
+    <p>Vous avez accès à la section administrateur.</p>
+    <button>Gérer les utilisateurs</button>
+  }
+  @if (user.role == 'user') {
+    <p>Vous avez accès à la section utilisateur.</p>
+    <button>Informations utilisateur</button>
+  }
+  @if (!user.role) {
+    <p>Votre rôle n'est pas défini. Veuillez contacter l'administrateur.</p>
+  }
+</section>
+
+<section>
+  <h3>&#64;if — classe User</h3>
+  <div class="controles">
+    <button (click)="selectionner()">Sélectionner Bob</button>
+    <button (click)="deselectionner()">Désélectionner</button>
+  </div>
+  @if (selectedUser) {
+    <h4>Utilisateur sélectionné :</h4>
+    <p>Nom: {{ selectedUser.name }}</p>
+    <p>Email: {{ selectedUser.email }}</p>
+    <p>Nom d'utilisateur: {{ selectedUser.username }}</p>
+  } @else {
+    <p>Aucun utilisateur sélectionné</p>
+  }
+</section>
